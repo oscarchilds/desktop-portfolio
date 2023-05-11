@@ -1,0 +1,37 @@
+@import 'colours.scss';
+
+body {
+  background-color: #23262e;
+  height: 100vh;
+  margin: 0;
+}
+
+span {
+  color: white;
+  font-family: 'Hack', sans-serif;
+}
+
+input {
+  all: unset;
+  color: white;
+  caret-color: white;
+  font-family: 'Hack', sans-serif;
+  width: 100%;
+}
+
+a {
+  color: $blue;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.green {
+  color: $green;
+}
+
+.blue {
+  color: $blue;
+}
