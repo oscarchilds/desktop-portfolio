@@ -1,11 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted } from "vue";
 const url = ref("https://linkedin.com/in/oscar-childs-4b5843146/")
 
 onMounted(() => {
   window.open(url.value, '_blank')
 })
-
 </script>
 
 <template>

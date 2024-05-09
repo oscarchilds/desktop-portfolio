@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import commands from '@/data/commands'
+<script setup>
+import commands from '../../data/commands'
 </script>
 
 <template>

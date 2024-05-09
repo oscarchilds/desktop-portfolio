@@ -1,11 +1,10 @@
-<script setup lang="ts">
+<script setup>
 import { ref, shallowRef } from 'vue'
 import Commands from '../data/commands'
 import PlainText from './Commands/PlainText.vue'
 import UserInput from './Commands/UserInput.vue'
-import type { LineItem } from '../common/types'
 
-const buffer = shallowRef<LineItem[]>([
+const buffer = shallowRef([
   {
     component: PlainText,
     userInput: 'welcome to the website'
@@ -13,9 +12,10 @@ const buffer = shallowRef<LineItem[]>([
   {
     component: PlainText,
     userInput: 'Type help for a list of commands'
-  }])
+  }
+])
 
-const userInput = ref<string>('')
+const userInput = ref('')
 const input = ref()
 
 function submitInput() {

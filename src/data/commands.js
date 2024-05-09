@@ -1,4 +1,3 @@
-import type { Command } from '../common/types'
 import PlainText from '../components/Commands/PlainText.vue'
 import HelpCommand from '../components/Commands/HelpCommand.vue'
 import LinkedIn from '../components/Commands/LinkedIn.vue'
@@ -25,4 +24,4 @@ export default [
     description: 'open my github in a new tab',
     component: Github
   }
-] as Command[]
+]

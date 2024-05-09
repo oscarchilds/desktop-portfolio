@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import type { LineItem } from '../../common/types'
-
-defineProps<{
-  lineItem: LineItem 
-}>()
+<script setup>
+defineProps({
+  lineItem: Object
+})
 </script>
 
 <template>
