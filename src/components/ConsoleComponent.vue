@@ -27,7 +27,7 @@ function submitInput() {
     userInput: input
   })
 
-  var command = Commands.find(x => x.name == input)
+  var command = Commands.find((x) => x.name == input)
 
   if (!command) {
     buffer.value.push({
@@ -47,16 +47,34 @@ function focusInput() {
   input.value.focus()
 }
 
-defineExpose({focusInput})
+defineExpose({ focusInput })
 </script>
 
 <template>
   <div class="console">
-    <div v-for="(lineItem, key) in buffer" :key="key" class="item">
-      <component :is="lineItem.component" :lineItem="lineItem"/>
+    <div
+      v-for="(lineItem, key) in buffer"
+      :key="key"
+      class="item"
+    >
+      <component
+        :is="lineItem.component"
+        :lineItem="lineItem"
+      />
     </div>
     <div class="input-line">
-      <span><span class="green">user@system</span>:<span class="blue">~</span>$ </span><input v-model="userInput" type="text" v-on:keyup.enter="submitInput" ref="input">
+      <span>
+        <span class="green">user@system</span>
+        :
+        <span class="blue">~</span>
+        $
+      </span>
+      <input
+        v-model="userInput"
+        type="text"
+        v-on:keyup.enter="submitInput"
+        ref="input"
+      />
     </div>
   </div>
 </template>

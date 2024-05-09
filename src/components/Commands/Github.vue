@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
-const url = ref("https://github.com/oscarchilds")
+import { ref, onMounted } from 'vue'
+const url = ref('https://github.com/oscarchilds')
 
 onMounted(() => {
   window.open(url.value, '_blank')

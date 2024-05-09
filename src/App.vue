@@ -1,16 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Console from './components/ConsoleComponent.vue'
 
 const consoleRef = ref()
 
-const clickAnywhere = function() {
+function clickAnywhere() {
   consoleRef.value.focusInput()
 }
+
+onMounted(() => {
+  clickAnywhere()
+})
 </script>
 
 <template>
-  <div class="container" @click="clickAnywhere">
+  <div
+    class="container"
+    @click="clickAnywhere"
+  >
     <Console ref="consoleRef" />
   </div>
 </template>
@@ -20,9 +27,8 @@ const clickAnywhere = function() {
   height: 100%;
 
   .container {
-    padding: 2%;
-    width: 96%;
-    height: 96%;
+    padding: 10px;
+    height: calc(100% - 20px);
   }
 }
 </style>
