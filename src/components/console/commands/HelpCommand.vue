@@ -1,5 +1,5 @@
 <script setup>
-import commands from '../../data/commands'
+import commands from '@data/commands'
 </script>
 
 <template>

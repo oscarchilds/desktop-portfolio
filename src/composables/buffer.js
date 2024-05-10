@@ -1,7 +1,7 @@
 import { ref, shallowRef } from "vue"
-import Commands from '../data/commands.js'
-import PlainText from '../components/commands/PlainText.vue'
-import UserInput from '../components/commands/UserInput.vue'
+import Commands from '@data/commands.js'
+import PlainText from '@components/console/commands/PlainText.vue'
+import UserInput from '@components/console/commands/UserInput.vue'
 
 export function useBuffer() {
   const buffer = shallowRef([

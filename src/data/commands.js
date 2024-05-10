@@ -1,6 +1,6 @@
-import PlainText from '../components/commands/PlainText.vue'
-import HelpCommand from '../components/commands/HelpCommand.vue'
-import LinkComponent from '../components/commands/LinkComponent.vue'
+import PlainText from '@components/console/commands/PlainText.vue'
+import HelpCommand from '@components/console/commands/HelpCommand.vue'
+import LinkComponent from '@components/console/commands/LinkComponent.vue'
 
 export default [
   {

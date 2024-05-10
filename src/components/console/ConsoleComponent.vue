@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useBuffer } from '../composables/buffer.js'
+import { useBuffer } from '@composables/buffer.js'
+import WindowHeader from '@components/ui/WindowHeader.vue'
 
 const { buffer, userInput, submitInput } = useBuffer()
 
@@ -14,7 +15,8 @@ defineExpose({ focusInput })
 </script>
 
 <template>
-  <div class="console">
+  <div id="console">
+    <window-header />
     <div
       v-for="(lineData, key) in buffer"
       :key="key"
@@ -43,8 +45,15 @@ defineExpose({ focusInput })
 </template>
 
 <style lang="scss" scoped>
-.input-line {
-  display: flex;
-  white-space: pre;
+#console {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border: 1px solid white;
+
+  .input-line {
+    display: flex;
+    white-space: pre;
+  }
 }
 </style>
