@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useBuffer } from '@composables/buffer.js'
-import WindowHeader from '@components/ui/WindowHeader.vue'
+import Window from '@components/ui/Window.vue'
 
 const { buffer, userInput, submitInput } = useBuffer()
 
@@ -15,43 +15,40 @@ defineExpose({ focusInput })
 </script>
 
 <template>
-  <div id="console">
-    <window-header />
-    <div
-      v-for="(lineData, key) in buffer"
-      :key="key"
-      class="line"
-    >
-      <component
-        :is="lineData.component"
-        :lineData="lineData"
-      />
+  <window id="console">
+    <template #title>console</template>
+    <div class="window-content">
+      <div
+        v-for="(lineData, key) in buffer"
+        :key="key"
+        class="line"
+      >
+        <component
+          :is="lineData.component"
+          :lineData="lineData"
+        />
+      </div>
+      <div class="input-line">
+        <span>
+          <span class="green">user@system</span>
+          :
+          <span class="blue">~</span>
+          $
+        </span>
+        <input
+          v-model="userInput"
+          type="text"
+          v-on:keyup.enter="submitInput"
+          ref="inputField"
+        />
+      </div>
     </div>
-    <div class="input-line">
-      <span>
-        <span class="green">user@system</span>
-        :
-        <span class="blue">~</span>
-        $
-      </span>
-      <input
-        v-model="userInput"
-        type="text"
-        v-on:keyup.enter="submitInput"
-        ref="inputField"
-      />
-    </div>
-  </div>
+  </window>
 </template>
 
 <style lang="scss" scoped>
-#console {
-  position: absolute;
-  min-width: 300px;
-  min-height: 200px;
-  border: 1px solid white;
-  resize: both;
-  overflow: auto;
+.window-content {
+  padding: 10px;
 
   .input-line {
     display: flex;

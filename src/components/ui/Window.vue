@@ -1,0 +1,39 @@
+<script setup></script>
+
+<template>
+  <div class="window">
+    <div class="header">
+      <slot name="title" />
+      <div class="buttons">
+        <button @click="$emit('minimise')">min</button>
+        <button @click="$emit('fullscreen')">fullscreen</button>
+        <button @click="$emit('close')">close</button>
+      </div>
+    </div>
+    <slot />
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.window {
+  position: absolute;
+  min-width: 300px;
+  min-height: 200px;
+  border: 1px solid white;
+  resize: both;
+  overflow: auto;
+
+  .header {
+    height: 20px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+
+    .buttons {
+      position: absolute;
+      right: 0px;
+    }
+  }
+}
+</style>
