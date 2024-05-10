@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  lineItem: Object
+  lineData: Object
 })
 </script>
 
@@ -10,7 +10,7 @@ defineProps({
       <span class="green">user@system</span>
       :
       <span class="blue">~</span>
-      $ {{ lineItem.userInput }}
+      $ {{ lineData.text }}
     </span>
   </div>
 </template>

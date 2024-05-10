@@ -1,50 +1,13 @@
 <script setup>
-import { ref, shallowRef } from 'vue'
-import Commands from '../data/commands'
-import PlainText from './Commands/PlainText.vue'
-import UserInput from './Commands/UserInput.vue'
+import { ref } from 'vue'
+import { useBuffer } from '../composables/buffer.js'
 
-const buffer = shallowRef([
-  {
-    component: PlainText,
-    userInput: 'welcome to the website'
-  },
-  {
-    component: PlainText,
-    userInput: 'Type help for a list of commands'
-  }
-])
+const { buffer, userInput, submitInput } = useBuffer()
 
-const userInput = ref('')
-const input = ref()
-
-function submitInput() {
-  const input = userInput.value
-  userInput.value = ''
-
-  buffer.value.push({
-    component: UserInput,
-    userInput: input
-  })
-
-  var command = Commands.find((x) => x.name == input)
-
-  if (!command) {
-    buffer.value.push({
-      component: PlainText,
-      userInput: `${input}: command not found`
-    })
-
-    return
-  }
-
-  buffer.value.push({
-    component: command.component
-  })
-}
+const inputField = ref()
 
 function focusInput() {
-  input.value.focus()
+  inputField.value.focus()
 }
 
 defineExpose({ focusInput })
@@ -53,13 +16,13 @@ defineExpose({ focusInput })
 <template>
   <div class="console">
     <div
-      v-for="(lineItem, key) in buffer"
+      v-for="(lineData, key) in buffer"
       :key="key"
-      class="item"
+      class="line"
     >
       <component
-        :is="lineItem.component"
-        :lineItem="lineItem"
+        :is="lineData.component"
+        :lineData="lineData"
       />
     </div>
     <div class="input-line">
@@ -73,25 +36,15 @@ defineExpose({ focusInput })
         v-model="userInput"
         type="text"
         v-on:keyup.enter="submitInput"
-        ref="input"
+        ref="inputField"
       />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/colours.scss';
-
 .input-line {
   display: flex;
   white-space: pre;
-}
-
-.green {
-  color: $green;
-}
-
-.blue {
-  color: $blue;
 }
 </style>

@@ -1,0 +1,44 @@
+import { ref, shallowRef } from "vue"
+import Commands from '../data/commands.js'
+import PlainText from '../components/commands/PlainText.vue'
+import UserInput from '../components/commands/UserInput.vue'
+
+export function useBuffer() {
+  const buffer = shallowRef([
+    {
+      component: PlainText,
+      text: 'welcome to the website'
+    },
+    {
+      component: PlainText,
+      text: 'Type help for a list of commands'
+    }
+  ])
+
+  const userInput = ref("")
+
+  function submitInput() {
+    const text = userInput.value
+    userInput.value = ''
+
+    buffer.value.push({
+      component: UserInput,
+      text: text
+    })
+
+    const command = Commands.find(x => x.name === text)
+
+    if (!command) {
+      buffer.value.push({
+        component: PlainText,
+        text: `${text}: command not found`
+      })
+
+      return
+    }
+
+    buffer.value.push(command.lineData)
+  }
+
+  return { buffer, userInput, submitInput }
+}

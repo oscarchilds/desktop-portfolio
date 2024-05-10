@@ -1,11 +1,11 @@
 <script setup>
 defineProps({
-  lineItem: Object
+  lineData: Object
 })
 </script>
 
 <template>
   <div>
-    <span>{{ lineItem.userInput }}</span>
+    <span>{{ lineData.text }}</span>
   </div>
 </template>

@@ -19,10 +19,6 @@ input {
   width: 100%;
 }
 
-a {
-  color: $blue;
-}
-
 .column {
   display: flex;
   flex-direction: column;
@@ -32,6 +28,6 @@ a {
   color: $green;
 }
 
-.blue {
+.blue, a {
   color: $blue;
 }
