@@ -47,9 +47,11 @@ defineExpose({ focusInput })
 <style lang="scss" scoped>
 #console {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  min-width: 300px;
+  min-height: 200px;
   border: 1px solid white;
+  resize: both;
+  overflow: auto;
 
   .input-line {
     display: flex;
