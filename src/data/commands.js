@@ -35,5 +35,10 @@ export default [
       text: 'my github',
       url: 'https://github.com/oscarchilds'
     }
+  },
+  {
+    name: 'clear',
+    description: 'clear the console',
+    clear: true
   }
 ]

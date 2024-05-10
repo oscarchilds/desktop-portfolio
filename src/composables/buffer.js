@@ -37,6 +37,11 @@ export function useBuffer() {
       return
     }
 
+    if (command.clear) {
+      buffer.value = []
+      return
+    }
+
     buffer.value.push(command.lineData)
   }
 
