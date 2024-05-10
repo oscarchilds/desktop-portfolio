@@ -1,10 +1,11 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useDraggable } from '@composables/draggable.js'
-import { useDesktopManagement } from '@composables/desktopManagement.js'
+import { useDesktopManagementStore } from '@stores/desktopManagement.js'
+import Taskbar from '@components/taskbar/Taskbar.vue'
 
 const { Draggable } = useDraggable()
-const { openWindows, closeWindow } = useDesktopManagement()
+const desktopManagement = useDesktopManagementStore()
 
 onMounted(() => {
   Draggable.create('#console', {
@@ -17,11 +18,12 @@ onMounted(() => {
 <template>
   <div id="desktop">
     <component
-      v-for="(window, key) in openWindows"
+      v-for="(window, key) in desktopManagement.openWindows"
       :key="key"
       :is="window.component"
-      @close="closeWindow(window.id)"
+      @close="desktopManagement.closeWindow(window.id)"
     />
+    <taskbar />
   </div>
 </template>
 
