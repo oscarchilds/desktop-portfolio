@@ -16,7 +16,7 @@ const showStartMenu = ref(false)
     />
     <button
       id="start-button"
-      @click="showStartMenu = true"
+      @click="showStartMenu = !showStartMenu"
     >
       start
     </button>
@@ -24,8 +24,10 @@ const showStartMenu = ref(false)
       v-for="(window, key) in desktopManagement.windows"
       :key="key"
       class="window"
+      :class="{ focused: window.focused }"
+      @click="desktopManagement.focusWindow(window.id)"
     >
-      {{ window.name }}
+      {{ window.program.name }}
     </div>
   </div>
 </template>
@@ -54,6 +56,13 @@ const showStartMenu = ref(false)
     width: 200px;
     height: 100%;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(.focused) {
+      background-color: gray;
+    }
   }
 }
 </style>

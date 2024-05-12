@@ -40,5 +40,13 @@
       right: 0px;
     }
   }
+
+  &:not(.focused) {
+    border: 1px solid gray;
+
+    .header {
+      background-color: gray;
+    }
+  }
 }
 </style>

@@ -35,6 +35,7 @@ function assignDraggables() {
       :key="key"
       :is="window.program.component"
       :id="window.id"
+      :class="{ focused: window.focused }"
       @close="desktopManagement.closeWindow(window.id)"
     />
     <taskbar />

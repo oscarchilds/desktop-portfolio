@@ -8,7 +8,8 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
         id: `id-${self.crypto.randomUUID()}`,
         program: consoleProgram,
         minimised: false,
-        draggable: null
+        draggable: null,
+        focused: true
       }
     ]
   }),
@@ -17,11 +18,14 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
       this.windows = this.windows.filter(x => x.id !== id)
     },
     openProgram(program) {
+      this.windows.forEach(x => x.focused = false)
+
       this.windows.push({
         id: `id-${self.crypto.randomUUID()}`,
         program: program,
         open: true,
-        minimised: false
+        minimised: false,
+        focused: true
       })
     },
     setWindowDraggable(id, draggable) {
@@ -30,6 +34,9 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
       if (!window) console.error(`Error closing window with ID ${id}`)
 
       window.draggable = draggable
+    },
+    focusWindow(id) {
+      this.windows.forEach(x => x.focused = x.id === id)
     }
   }
 })
