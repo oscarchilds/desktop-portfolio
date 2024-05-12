@@ -41,6 +41,7 @@ const showStartMenu = ref(false)
   background-color: darkcyan;
   display: flex;
   gap: 5px;
+  z-index: 1000;
 
   #start-menu {
     position: absolute;

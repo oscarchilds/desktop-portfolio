@@ -31,11 +31,12 @@ function assignDraggables() {
 <template>
   <div id="desktop">
     <component
-      v-for="(window, key) in windows"
-      :key="key"
+      v-for="window in windows"
+      :key="window.id"
       :is="window.program.component"
       :id="window.id"
       :class="{ focused: window.focused }"
+      :style="{ 'z-index': window.focusOrder }"
       @focus="desktopManagement.focusWindow(window.id)"
       @close="desktopManagement.closeWindow(window.id)"
     />

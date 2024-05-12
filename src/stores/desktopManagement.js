@@ -9,13 +9,23 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
         program: consoleProgram,
         minimised: false,
         draggable: null,
-        focused: true
+        focused: true,
+        focusOrder: 0
       }
     ]
   }),
   actions: {
     closeWindow(id) {
-      this.windows = this.windows.filter(x => x.id !== id)
+      const windowToClose = this.windows.find(x => x.id == id)
+
+      if (windowToClose.focused) {
+        const focusOrderToFind = windowToClose.focusOrder - 1
+        const nextWindowToFocus = this.windows.find(x => x.focusOrder == focusOrderToFind)
+
+        nextWindowToFocus.focused = true
+      }
+
+      this.windows = this.windows.filter(x => x.id != id)
     },
     openProgram(program) {
       this.windows.forEach(x => x.focused = false)
@@ -25,7 +35,8 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
         program: program,
         open: true,
         minimised: false,
-        focused: true
+        focused: true,
+        focusOrder: this.windows.length
       })
     },
     setWindowDraggable(id, draggable) {
@@ -36,7 +47,19 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
       window.draggable = draggable
     },
     focusWindow(id) {
-      this.windows.forEach(x => x.focused = x.id === id)
+      const windowToFocus = this.windows.find(x => x.id == id)
+      const otherWindows = this.windows.filter(x => x.id != id)
+
+      otherWindows.forEach(x => {
+        x.focused = false
+
+        if (x.focusOrder > windowToFocus.focusOrder) {
+          x.focusOrder--
+        }
+      })
+
+      windowToFocus.focused = true
+      windowToFocus.focusOrder = this.windows.length
     }
   }
 })
