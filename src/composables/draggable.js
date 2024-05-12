@@ -4,5 +4,12 @@ import { Draggable } from 'gsap/Draggable'
 export function useDraggable() {
   gsap.registerPlugin(Draggable)
 
-  return { Draggable }
+  function createDraggable(target) {
+    return Draggable.create(target, {
+      trigger: target.querySelector('.header'),
+      bounds: '#desktop'
+    })
+  }
+
+  return { createDraggable }
 }

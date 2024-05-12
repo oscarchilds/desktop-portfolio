@@ -17,11 +17,16 @@
 <style lang="scss" scoped>
 .window {
   position: absolute;
-  min-width: 300px;
+  min-width: 400px;
   min-height: 200px;
   border: 1px solid white;
   resize: both;
   overflow: auto;
+  top: 30px;
+  left: 30px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
 
   .header {
     height: 20px;

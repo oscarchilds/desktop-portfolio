@@ -1,26 +1,40 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch, computed } from 'vue'
 import { useDraggable } from '@composables/draggable.js'
 import { useDesktopManagementStore } from '@stores/desktopManagement.js'
 import Taskbar from '@components/taskbar/Taskbar.vue'
+import { storeToRefs } from 'pinia'
 
-const { Draggable } = useDraggable()
+const { createDraggable } = useDraggable()
 const desktopManagement = useDesktopManagementStore()
-
-onMounted(() => {
-  Draggable.create('#console', {
-    trigger: '.header',
-    bounds: '#desktop'
-  })
+const { windows } = storeToRefs(desktopManagement)
+const windowsLength = computed(() => {
+  return windows.value.length
 })
+
+onMounted(() => assignDraggables())
+watch(windowsLength, () => assignDraggables())
+
+function assignDraggables() {
+  windows.value
+    .filter((x) => !x.draggable)
+    .forEach((x) => {
+      setTimeout(() => {
+        const el = document.getElementById(x.id)
+
+        desktopManagement.setWindowDraggable(x.id, createDraggable(el))
+      }, 100)
+    })
+}
 </script>
 
 <template>
   <div id="desktop">
     <component
-      v-for="(window, key) in desktopManagement.openWindows"
+      v-for="(window, key) in windows"
       :key="key"
-      :is="window.component"
+      :is="window.program.component"
+      :id="window.id"
       @close="desktopManagement.closeWindow(window.id)"
     />
     <taskbar />
@@ -32,5 +46,23 @@ onMounted(() => {
   position: relative;
   width: 100%;
   height: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 100s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>

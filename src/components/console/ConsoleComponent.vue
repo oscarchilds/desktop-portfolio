@@ -15,7 +15,7 @@ defineExpose({ focusInput })
 </script>
 
 <template>
-  <window id="console">
+  <window class="console">
     <template #title>console</template>
     <div class="window-content">
       <div
@@ -47,8 +47,12 @@ defineExpose({ focusInput })
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/colours.scss';
+
 .window-content {
   padding: 10px;
+  background-color: $darkpurple;
+  flex-grow: 1;
 
   .input-line {
     display: flex;
