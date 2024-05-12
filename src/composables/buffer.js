@@ -26,7 +26,7 @@ export function useBuffer() {
       text: text
     })
 
-    const command = Commands.find(x => x.name === text)
+    const command = Commands.find(x => x.name.toLowerCase() === text?.toLowerCase())
 
     if (!command) {
       buffer.value.push({
