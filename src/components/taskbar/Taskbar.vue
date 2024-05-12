@@ -63,6 +63,10 @@ const showStartMenu = ref(false)
     &:not(.focused) {
       background-color: gray;
     }
+
+    &:hover {
+      background-color: lightgray;
+    }
   }
 }
 </style>

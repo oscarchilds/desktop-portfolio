@@ -1,7 +1,10 @@
 <script setup></script>
 
 <template>
-  <div class="window">
+  <div
+    class="window"
+    @click="$emit('focus')"
+  >
     <div class="header">
       <slot name="title" />
       <div class="buttons">
