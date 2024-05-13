@@ -1,14 +1,14 @@
 <template>
   <div
     class="window"
-    @click="$emit('focus')"
+    @pointerdown="$emit('focus')"
   >
     <div class="header">
       <slot name="title" />
       <div class="buttons">
-        <button @click="$emit('minimise')">min</button>
-        <button @click="$emit('fullscreen')">fullscreen</button>
-        <button @click="$emit('close')">close</button>
+        <button @pointerdown.stop="$emit('minimise')">min</button>
+        <button @pointerdown="$emit('fullscreen')">fullscreen</button>
+        <button @pointerdown="$emit('close')">close</button>
       </div>
     </div>
     <slot />

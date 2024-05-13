@@ -17,13 +17,18 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
   actions: {
     closeWindow(id) {
       const windowToClose = this.windows.find(x => x.id == id)
+      const otherWindows = this.windows.filter(x => x.id != id)
 
-      if (windowToClose.focused) {
+      if (windowToClose.focused && this.windows.length > 1) {
         const focusOrderToFind = windowToClose.focusOrder - 1
         const nextWindowToFocus = this.windows.find(x => x.focusOrder == focusOrderToFind)
 
         nextWindowToFocus.focused = true
       }
+
+      otherWindows
+        .filter(x => x.focusOrder > windowToClose.focusOrder)
+        .forEach(x => x.focusOrder--)
 
       this.windows = this.windows.filter(x => x.id != id)
     },
@@ -59,7 +64,26 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
       })
 
       windowToFocus.focused = true
-      windowToFocus.focusOrder = this.windows.length
+      windowToFocus.focusOrder = this.windows.length - 1
+      windowToFocus.minimised = false
+    },
+    hideWindow(id) {
+      const windowToHide = this.windows.find(x => x.id == id)
+      const otherWindows = this.windows.filter(x => x.id != id)
+
+      if (otherWindows.length) {
+        otherWindows
+          .filter(x => x.focusOrder < windowToHide.focusOrder)
+          .forEach(x => x.focusOrder++)
+
+        otherWindows
+          .find(x => x.focusOrder == this.windows.length - 1)
+          .focused = true
+      }
+
+      windowToHide.focused = false
+      windowToHide.focusOrder = 0
+      windowToHide.minimised = true
     }
   }
 })

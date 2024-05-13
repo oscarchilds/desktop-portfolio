@@ -32,12 +32,14 @@ function assignDraggables() {
   <div id="desktop">
     <component
       v-for="window in windows"
+      v-show="!window.minimised"
       :key="window.id"
       :is="window.program.component"
       :id="window.id"
       :class="{ focused: window.focused }"
       :style="{ 'z-index': window.focusOrder }"
       @focus="desktopManagement.focusWindow(window.id)"
+      @minimise="desktopManagement.hideWindow(window.id)"
       @close="desktopManagement.closeWindow(window.id)"
     />
     <taskbar />
