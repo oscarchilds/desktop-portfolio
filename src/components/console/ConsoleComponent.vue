@@ -10,12 +10,13 @@ const inputField = ref()
 function focusInput() {
   inputField.value.focus()
 }
-
-defineExpose({ focusInput })
 </script>
 
 <template>
-  <window class="console">
+  <window
+    class="console"
+    @click="focusInput"
+  >
     <template #title>console</template>
     <div class="window-content">
       <div

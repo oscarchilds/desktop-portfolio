@@ -15,8 +15,8 @@ function clickProgram(program) {
   <div id="start-menu">
     <span>programs</span>
     <button
-      v-for="(program, key) in programs"
-      :key="key"
+      v-for="program in programs"
+      :key="program.name"
       class="program"
       @click="clickProgram(program)"
     >
