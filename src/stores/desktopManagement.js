@@ -23,7 +23,7 @@ export const useDesktopManagementStore = defineStore('desktopManagment', {
         const focusOrderToFind = windowToClose.focusOrder - 1
         const nextWindowToFocus = this.windows.find(x => x.focusOrder == focusOrderToFind)
 
-        nextWindowToFocus.focused = true
+        if (!nextWindowToFocus.minimised) nextWindowToFocus.focused = true
       }
 
       otherWindows
