@@ -1,12 +1,12 @@
 <script setup>
 import { programs } from '@data/programs.js'
-import { useDesktopManagementStore } from '@stores/desktopManagement.js'
+import { useWindowManagementStore } from '@stores/windowManagement.js'
 
-const desktopManagement = useDesktopManagementStore()
+const windowManagement = useWindowManagementStore()
 const emit = defineEmits(['close'])
 
 function clickProgram(program) {
-  desktopManagement.openProgram(program)
+  windowManagement.openProgram(program)
   emit('close')
 }
 </script>

@@ -1,13 +1,13 @@
 <script setup>
 import { onMounted, watch, computed } from 'vue'
 import { useDraggable } from '@composables/draggable.js'
-import { useDesktopManagementStore } from '@stores/desktopManagement.js'
+import { useWindowManagementStore } from '@stores/windowManagement.js'
 import Taskbar from '@components/taskbar/Taskbar.vue'
 import { storeToRefs } from 'pinia'
 
 const { createDraggable } = useDraggable()
-const desktopManagement = useDesktopManagementStore()
-const { windows } = storeToRefs(desktopManagement)
+const windowManagement = useWindowManagementStore()
+const { windows } = storeToRefs(windowManagement)
 const windowsLength = computed(() => {
   return windows.value.length
 })
@@ -22,7 +22,7 @@ function assignDraggables() {
       setTimeout(() => {
         const el = document.getElementById(x.id)
 
-        desktopManagement.setWindowDraggable(x.id, createDraggable(el))
+        windowManagement.setWindowDraggable(x.id, createDraggable(el))
       }, 100)
     })
 }
@@ -38,9 +38,9 @@ function assignDraggables() {
       :id="window.id"
       :class="{ focused: window.focused }"
       :style="{ 'z-index': window.focusOrder }"
-      @focus="desktopManagement.focusWindow(window.id)"
-      @minimise="desktopManagement.hideWindow(window.id)"
-      @close="desktopManagement.closeWindow(window.id)"
+      @focus="windowManagement.focusWindow(window.id)"
+      @minimise="windowManagement.hideWindow(window.id)"
+      @close="windowManagement.closeWindow(window.id)"
     />
     <taskbar />
   </div>

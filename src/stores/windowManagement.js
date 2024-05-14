@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { consoleProgram } from "@data/programs.js"
 
-export const useDesktopManagementStore = defineStore('desktopManagment', {
+export const useWindowManagementStore = defineStore('windowManagment', {
   state: () => ({
     windows: [
       {

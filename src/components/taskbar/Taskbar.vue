@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import StartMenu from './StartMenu.vue'
-import { useDesktopManagementStore } from '@stores/desktopManagement.js'
+import { useWindowManagementStore } from '@stores/windowManagement.js'
 
-const desktopManagement = useDesktopManagementStore()
+const windowManagement = useWindowManagementStore()
 
 const showStartMenu = ref(false)
 </script>
@@ -21,11 +21,11 @@ const showStartMenu = ref(false)
       start
     </button>
     <div
-      v-for="(window, key) in desktopManagement.windows"
+      v-for="(window, key) in windowManagement.windows"
       :key="key"
       class="window"
       :class="{ focused: window.focused }"
-      @click="desktopManagement.focusWindow(window.id)"
+      @click="windowManagement.focusWindow(window.id)"
     >
       {{ window.program.name }}
     </div>
