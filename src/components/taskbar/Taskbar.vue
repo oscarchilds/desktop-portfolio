@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import StartMenu from './StartMenu.vue'
+import Tray from './Tray.vue'
 import { useWindowManagementStore } from '@stores/windowManagement.js'
 
 const windowManagement = useWindowManagementStore()
@@ -33,6 +34,7 @@ const showStartMenu = ref(false)
       />
       {{ window.program.name }}
     </div>
+    <Tray />
   </div>
 </template>
 
@@ -49,7 +51,8 @@ const showStartMenu = ref(false)
   gap: 5px;
   z-index: 1000;
 
-  > div:not(#start-menu) {
+  .window,
+  #start-button {
     background-color: #383b42;
     color: white;
     cursor: pointer;
