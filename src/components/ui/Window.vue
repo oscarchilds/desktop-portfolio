@@ -28,6 +28,7 @@
   background-color: black;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
 
   .header {
     height: 20px;

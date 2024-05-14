@@ -33,12 +33,14 @@ const showStartMenu = ref(false)
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/colours.scss';
+
 #taskbar {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: darkcyan;
+  background-color: $darkpurple;
   display: flex;
   gap: 5px;
   z-index: 1000;
@@ -56,17 +58,18 @@ const showStartMenu = ref(false)
   .window {
     width: 200px;
     height: 100%;
-    background-color: white;
+    background-color: #383B42;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 
-    &:not(.focused) {
-      background-color: gray;
+    &.focused {
+      background-color: #4E5157;
     }
 
     &:hover {
-      background-color: lightgray;
+      background-color: #65676C;
     }
   }
 }

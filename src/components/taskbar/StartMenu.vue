@@ -26,8 +26,10 @@ function clickProgram(program) {
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/colours.scss';
+
 #start-menu {
-  background-color: teal;
+  background-color: $darkpurple;
   height: 300px;
   width: 150px;
   display: flex;
