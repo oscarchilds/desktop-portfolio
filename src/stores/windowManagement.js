@@ -76,9 +76,9 @@ export const useWindowManagementStore = defineStore('windowManagment', {
           .filter(x => x.focusOrder < windowToHide.focusOrder)
           .forEach(x => x.focusOrder++)
 
-        otherWindows
-          .find(x => x.focusOrder == this.windows.length - 1)
-          .focused = true
+        const windowToFocus = otherWindows.find(x => x.focusOrder == this.windows.length - 1)
+
+        if (!windowToFocus.minimised) windowToFocus.focused = true
       }
 
       windowToHide.focused = false
