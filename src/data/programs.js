@@ -8,11 +8,10 @@ export const consoleProgram = {
   icon: 'terminal'
 }
 
-export const programs = [
-  consoleProgram,
-  {
-    component: markRaw(Notepad),
-    name: 'notepad',
-    icon: 'file-pen'
-  }
-]
+export const notepad = {
+  component: markRaw(Notepad),
+  name: 'notepad',
+  icon: 'file-pen'
+}
+
+export const programs = [consoleProgram, notepad]

@@ -1,10 +1,21 @@
+<script setup>
+const props = defineProps(['program'])
+
+const programIcon = props.program.icon
+const title = props.program.name
+</script>
+
 <template>
   <div
     class="window"
     @pointerdown="$emit('focus')"
   >
     <div class="header">
-      <slot name="title" />
+      <font-awesome-icon
+        class="window-icon"
+        :icon="programIcon"
+      />
+      <span>{{ title }}</span>
       <div class="buttons">
         <div @pointerdown.stop="$emit('minimise')">
           <font-awesome-icon icon="window-minimize" />
@@ -42,6 +53,17 @@
     background-color: white;
     display: flex;
     justify-content: center;
+    align-items: center;
+
+    .window-icon {
+      position: absolute;
+      left: 5px;
+    }
+
+    span {
+      font-size: 14px;
+      color: black;
+    }
 
     .buttons {
       position: absolute;

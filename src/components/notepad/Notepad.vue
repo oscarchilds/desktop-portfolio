@@ -1,10 +1,13 @@
 <script setup>
 import Window from '@components/ui/Window.vue'
+import { notepad } from '@data/programs'
 </script>
 
 <template>
-  <window class="console">
-    <template #title>notepad</template>
+  <window
+    class="console"
+    :program="notepad"
+  >
     <div class="window-content">
       <textarea />
     </div>

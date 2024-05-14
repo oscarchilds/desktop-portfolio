@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useBuffer } from '@composables/buffer.js'
 import Window from '@components/ui/Window.vue'
+import { consoleProgram } from '@data/programs'
 
 const { buffer, userInput, submitInput } = useBuffer()
 
@@ -15,9 +16,9 @@ function focusInput() {
 <template>
   <window
     class="console"
+    :program="consoleProgram"
     @click="focusInput"
   >
-    <template #title>console</template>
     <div class="window-content">
       <div
         v-for="(lineData, key) in buffer"
