@@ -6,16 +6,18 @@ body {
   margin: 0;
 }
 
+body, span, input, button {
+  font-family: 'Hack', sans-serif;
+}
+
 span {
   color: white;
-  font-family: 'Hack', sans-serif;
 }
 
 input {
   all: unset;
   color: white;
   caret-color: white;
-  font-family: 'Hack', sans-serif;
   width: 100%;
 }
 

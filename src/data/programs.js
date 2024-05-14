@@ -4,13 +4,15 @@ import Notepad from "@components/notepad/Notepad.vue"
 
 export const consoleProgram = {
   component: markRaw(ConsoleComponent),
-  name: 'console'
+  name: 'console',
+  icon: 'terminal'
 }
 
 export const programs = [
   consoleProgram,
   {
     component: markRaw(Notepad),
-    name: 'notepad'
+    name: 'notepad',
+    icon: 'file-pen'
   }
 ]

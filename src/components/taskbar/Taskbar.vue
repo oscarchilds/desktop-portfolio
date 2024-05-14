@@ -14,12 +14,12 @@ const showStartMenu = ref(false)
       v-if="showStartMenu"
       @close="showStartMenu = false"
     />
-    <button
+    <div
       id="start-button"
       @click="showStartMenu = !showStartMenu"
     >
       start
-    </button>
+    </div>
     <div
       v-for="(window, key) in windowManagement.windows"
       :key="key"
@@ -27,6 +27,10 @@ const showStartMenu = ref(false)
       :class="{ focused: window.focused }"
       @click="windowManagement.focusWindow(window.id)"
     >
+      <font-awesome-icon
+        :icon="window.program.icon"
+        size="xl"
+      />
       {{ window.program.name }}
     </div>
   </div>
@@ -45,6 +49,19 @@ const showStartMenu = ref(false)
   gap: 5px;
   z-index: 1000;
 
+  > div:not(#start-menu) {
+    background-color: #383b42;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    &:hover {
+      background-color: #65676c;
+    }
+  }
+
   #start-menu {
     position: absolute;
     left: 0;
@@ -52,24 +69,20 @@ const showStartMenu = ref(false)
   }
 
   #start-button {
-    width: 150px;
+    width: 100px;
+    justify-content: center;
   }
 
   .window {
     width: 200px;
-    height: 100%;
-    background-color: #383B42;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    gap: 10px;
 
-    &.focused {
-      background-color: #4E5157;
+    svg {
+      padding-left: 10px;
     }
 
-    &:hover {
-      background-color: #65676C;
+    &.focused {
+      background-color: #4e5157;
     }
   }
 }

@@ -1,10 +1,3 @@
-<script setup>
-// TODO: port to library method
-// https://docs.fontawesome.com/web/use-with/vue/add-icons
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faX, faExpand, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
-</script>
-
 <template>
   <div
     class="window"
@@ -14,13 +7,13 @@ import { faX, faExpand, faWindowMinimize } from '@fortawesome/free-solid-svg-ico
       <slot name="title" />
       <div class="buttons">
         <div @pointerdown.stop="$emit('minimise')">
-          <FontAwesomeIcon :icon="faWindowMinimize" />
+          <font-awesome-icon icon="window-minimize" />
         </div>
         <div @pointerdown="$emit('fullscreen')">
-          <FontAwesomeIcon :icon="faExpand" />
+          <font-awesome-icon icon="expand" />
         </div>
         <div @pointerdown="$emit('close')">
-          <FontAwesomeIcon :icon="faX" />
+          <font-awesome-icon icon="x" />
         </div>
       </div>
     </div>

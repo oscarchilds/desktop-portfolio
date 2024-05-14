@@ -20,6 +20,10 @@ function clickProgram(program) {
       class="program"
       @click="clickProgram(program)"
     >
+      <font-awesome-icon
+        :icon="program.icon"
+        size="xl"
+      />
       {{ program.name }}
     </button>
   </div>
@@ -37,6 +41,9 @@ function clickProgram(program) {
 
   .program {
     height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 }
 </style>
