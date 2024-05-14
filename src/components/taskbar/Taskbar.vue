@@ -57,8 +57,21 @@ const showStartMenu = ref(false)
     align-items: center;
     font-size: 14px;
 
+    &.focused {
+      background-color: #4e5157;
+    }
+
     &:hover {
       background-color: #65676c;
+    }
+
+    &.window {
+      width: 200px;
+      gap: 10px;
+
+      svg {
+        padding-left: 10px;
+      }
     }
   }
 
@@ -71,19 +84,6 @@ const showStartMenu = ref(false)
   #start-button {
     width: 100px;
     justify-content: center;
-  }
-
-  .window {
-    width: 200px;
-    gap: 10px;
-
-    svg {
-      padding-left: 10px;
-    }
-
-    &.focused {
-      background-color: #4e5157;
-    }
   }
 }
 </style>

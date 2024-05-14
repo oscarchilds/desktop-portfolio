@@ -9,6 +9,11 @@ function clickProgram(program) {
   windowManagement.openProgram(program)
   emit('close')
 }
+
+document.onclick = (e) => {
+  const clickedStart = ['start-button', 'start-menu'].includes(e.target.id)
+  if (!clickedStart) emit('close')
+}
 </script>
 
 <template>
