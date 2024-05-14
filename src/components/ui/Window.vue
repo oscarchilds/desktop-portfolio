@@ -1,3 +1,10 @@
+<script setup>
+// TODO: port to library method
+// https://docs.fontawesome.com/web/use-with/vue/add-icons
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faX, faExpand, faWindowMinimize } from '@fortawesome/free-solid-svg-icons'
+</script>
+
 <template>
   <div
     class="window"
@@ -6,9 +13,15 @@
     <div class="header">
       <slot name="title" />
       <div class="buttons">
-        <button @pointerdown.stop="$emit('minimise')">min</button>
-        <button @pointerdown="$emit('fullscreen')">fullscreen</button>
-        <button @pointerdown="$emit('close')">close</button>
+        <div @pointerdown.stop="$emit('minimise')">
+          <FontAwesomeIcon :icon="faWindowMinimize" />
+        </div>
+        <div @pointerdown="$emit('fullscreen')">
+          <FontAwesomeIcon :icon="faExpand" />
+        </div>
+        <div @pointerdown="$emit('close')">
+          <FontAwesomeIcon :icon="faX" />
+        </div>
       </div>
     </div>
     <slot />
@@ -39,7 +52,24 @@
 
     .buttons {
       position: absolute;
-      right: 0px;
+      right: 5px;
+      display: flex;
+      gap: 7px;
+      height: 20px;
+      align-items: center;
+
+      div {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        width: 13px;
+        height: 13px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 
