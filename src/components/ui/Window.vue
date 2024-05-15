@@ -67,9 +67,8 @@ const title = props.program.name
 
     .buttons {
       position: absolute;
-      right: 5px;
+      right: 1px;
       display: flex;
-      gap: 7px;
       height: 20px;
       align-items: center;
 
@@ -77,7 +76,7 @@ const title = props.program.name
         cursor: pointer;
         display: flex;
         align-items: center;
-        width: 13px;
+        width: 20px;
         height: 13px;
 
         svg {
