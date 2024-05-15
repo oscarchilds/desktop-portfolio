@@ -37,7 +37,7 @@ const title = props.program.name
   position: absolute;
   min-width: 400px;
   min-height: 200px;
-  border: 1px solid white;
+  border: 1px solid #999999;
   resize: both;
   overflow: auto;
   top: 30px;
@@ -50,10 +50,11 @@ const title = props.program.name
   .header {
     height: 20px;
     width: 100%;
-    background-color: white;
+    background-color: #23262e;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 
     .window-icon {
       position: absolute;
@@ -62,7 +63,6 @@ const title = props.program.name
 
     span {
       font-size: 14px;
-      color: black;
     }
 
     .buttons {

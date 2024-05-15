@@ -51,7 +51,7 @@ function assignDraggables() {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #331911, #4b162a, #0e3b4c, #0f5343);
   background-size: 400% 400%;
   animation: gradient 100s ease infinite;
   height: 100vh;
