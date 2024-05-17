@@ -17,21 +17,33 @@ export function useBuffer() {
 
   const userInput = ref("")
 
-  function submitInput() {
+  function submitInput(currentDir) {
     const text = userInput.value
     userInput.value = ''
 
     buffer.value.push({
       component: UserInput,
-      text: text
+      text: text,
+      dir: currentDir
     })
 
-    const command = Commands.find(x => x.name.toLowerCase() === text?.toLowerCase())
+    var commandText
+    var commandArguments = []
+    const indexOfSpaceChar = text.indexOf(' ')
+
+    if (indexOfSpaceChar > 0) {
+      commandText = text.substring(0, indexOfSpaceChar)
+      commandArguments = text.substring(indexOfSpaceChar + 1).split(' ')
+    } else {
+      commandText = text
+    }
+
+    const command = Commands.find(x => x.name.toLowerCase() === commandText?.toLowerCase())
 
     if (!command) {
       buffer.value.push({
         component: PlainText,
-        text: `${text}: command not found`
+        text: `${commandText}: command not found`
       })
 
       return
@@ -42,7 +54,11 @@ export function useBuffer() {
       return
     }
 
-    buffer.value.push(command.lineData)
+    buffer.value.push({
+      ...command.lineData,
+      commandArguments,
+      dir: currentDir
+    })
   }
 
   return { buffer, userInput, submitInput }

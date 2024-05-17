@@ -1,5 +1,9 @@
 <script setup>
 import Desktop from '@components/Desktop.vue'
+import { useFileSystem } from './composables/fileSystem'
+
+const { initialiseFileSystem } = useFileSystem()
+initialiseFileSystem()
 </script>
 
 <template>

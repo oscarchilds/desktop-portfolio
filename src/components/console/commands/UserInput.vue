@@ -7,9 +7,9 @@ defineProps({
 <template>
   <div>
     <span>
-      <span class="green">user@system</span>
+      <span class="green">oscar@system</span>
       :
-      <span class="blue">~</span>
+      <span class="blue">{{ lineData.dir }}</span>
       $ {{ lineData.text }}
     </span>
   </div>

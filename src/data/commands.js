@@ -1,6 +1,7 @@
 import PlainText from '@components/console/commands/PlainText.vue'
 import HelpCommand from '@components/console/commands/HelpCommand.vue'
 import LinkComponent from '@components/console/commands/LinkComponent.vue'
+import ChangeDirectory from '@components/console/commands/ChangeDirectory.vue'
 
 export default [
   {
@@ -34,6 +35,13 @@ export default [
       component: LinkComponent,
       text: 'my github',
       url: 'https://github.com/oscarchilds'
+    }
+  },
+  {
+    name: 'cd',
+    description: 'change directory',
+    lineData: {
+      component: ChangeDirectory,
     }
   },
   {
