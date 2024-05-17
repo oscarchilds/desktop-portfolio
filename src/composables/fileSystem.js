@@ -7,12 +7,17 @@ export function useFileSystem() {
     fs.writeFileSync('/users/oscar/about-me.txt', 'Hello from about-me.txt')
   }
 
-  function doesFolderExist(folder) {
-    return fs.existsSync(folder)
+  function doesFolderExist(dir) {
+    return fs.existsSync(dir)
+  }
+
+  function readDir(dir) {
+    return fs.readdirSync(dir)
   }
 
   return {
     initialiseFileSystem,
-    doesFolderExist
+    doesFolderExist,
+    readDir
   }
 }

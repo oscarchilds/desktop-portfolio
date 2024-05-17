@@ -2,6 +2,7 @@ import PlainText from '@components/console/commands/PlainText.vue'
 import HelpCommand from '@components/console/commands/HelpCommand.vue'
 import LinkComponent from '@components/console/commands/LinkComponent.vue'
 import ChangeDirectory from '@components/console/commands/ChangeDirectory.vue'
+import ReadDirectory from '@components/console/commands/ReadDirectory.vue'
 
 export default [
   {
@@ -42,6 +43,13 @@ export default [
     description: 'change directory',
     lineData: {
       component: ChangeDirectory,
+    }
+  },
+  {
+    name: 'dir',
+    description: 'read directory',
+    lineData: {
+      component: ReadDirectory,
     }
   },
   {
