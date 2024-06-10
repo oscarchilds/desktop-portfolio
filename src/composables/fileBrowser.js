@@ -2,7 +2,7 @@ import { computed, ref } from "vue"
 import { useFileSystem } from "./fileSystem";
 
 export function useFileBrowser() {
-  const { doesFolderExist } = useFileSystem()
+  const { doesFolderExist, readDir, getDirentStat } = useFileSystem()
 
   const homeDir = '/users/oscar'
   const currentDir = ref(homeDir)
@@ -30,6 +30,10 @@ export function useFileBrowser() {
   function goToDir(target) {
     const fullTargetDir = `${currentDir.value}/${target}`.replace('//', '/')
 
+    goToFullDir(fullTargetDir)
+  }
+
+  function goToFullDir(fullTargetDir) {
     if (doesFolderExist(fullTargetDir)) {
       currentDir.value = fullTargetDir
     }
@@ -51,11 +55,48 @@ export function useFileBrowser() {
     goToDir(target)
   }
 
+  function searchForDirectory(fullTargetDir) {
+    const folderExists = doesFolderExist(fullTargetDir)
+
+    if (folderExists) {
+      goToFullDir(fullTargetDir)
+      return true
+    } else {
+      return false
+    }
+  }
+
+  function readDirForFileBrowser(fullTargetDir) {
+    const options = {
+      withFileTypes: true
+    }
+
+    const files = readDir(fullTargetDir, options)
+
+    function padToTwo(value) {
+      return value.toString().padStart(2, 0)
+    }
+
+    return files.map(file => {
+      const stats = getDirentStat(`${fullTargetDir}/${file.name}`)
+      const mtime = stats.mtime
+
+      return {
+        name: file.name,
+        size: file.isDirectory() ? '' : stats.size,
+        isDirectory: file.isDirectory(),
+        lastModified: `${padToTwo(mtime.getDay())}/${padToTwo(mtime.getMonth())}/${mtime.getFullYear()} ${padToTwo(mtime.getHours())}:${padToTwo(mtime.getMinutes())}`
+      }
+    })
+  }
+
   return {
     currentDir,
     friendlyCurrentDir,
     goUpOneDir,
     goToHomeDir,
-    changeDirectory
+    changeDirectory,
+    searchForDirectory,
+    readDirForFileBrowser
   }
 }

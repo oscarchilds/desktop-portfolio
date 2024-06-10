@@ -1,12 +1,12 @@
 import { defineStore } from "pinia"
-import { consoleProgram } from "@data/programs.js"
+import { fileBrowser } from "@data/programs"
 
 export const useWindowManagementStore = defineStore('windowManagment', {
   state: () => ({
     windows: [
       {
         id: `id-${self.crypto.randomUUID()}`,
-        program: consoleProgram,
+        program: fileBrowser,
         minimised: false,
         draggable: null,
         focused: true,

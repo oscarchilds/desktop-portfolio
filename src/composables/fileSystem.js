@@ -11,13 +11,18 @@ export function useFileSystem() {
     return fs.existsSync(dir)
   }
 
-  function readDir(dir) {
-    return fs.readdirSync(dir)
+  function readDir(dir, options = {}) {
+    return fs.readdirSync(dir, options)
+  }
+
+  function getDirentStat(direntPath) {
+    return fs.statSync(direntPath)
   }
 
   return {
     initialiseFileSystem,
     doesFolderExist,
-    readDir
+    readDir,
+    getDirentStat
   }
 }

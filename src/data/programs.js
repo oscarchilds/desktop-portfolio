@@ -1,6 +1,7 @@
 import { markRaw } from 'vue'
 import ConsoleComponent from "@components/console/ConsoleComponent.vue"
 import Notepad from "@components/notepad/Notepad.vue"
+import FileBrowser from "@components/fileBrowser/FileBrowser.vue"
 
 export const consoleProgram = {
   component: markRaw(ConsoleComponent),
@@ -14,4 +15,10 @@ export const notepad = {
   icon: 'file-pen'
 }
 
-export const programs = [consoleProgram, notepad]
+export const fileBrowser = {
+  component: markRaw(FileBrowser),
+  name: 'file browser',
+  icon: 'folder'
+}
+
+export const programs = [consoleProgram, notepad, fileBrowser]

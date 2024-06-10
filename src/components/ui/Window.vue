@@ -11,22 +11,25 @@ const title = props.program.name
     @pointerdown="$emit('focus')"
   >
     <div class="header">
-      <font-awesome-icon
-        class="window-icon"
-        :icon="programIcon"
-      />
-      <span>{{ title }}</span>
-      <div class="buttons">
-        <div @pointerdown.stop="$emit('minimise')">
-          <font-awesome-icon icon="window-minimize" />
-        </div>
-        <div @pointerdown="$emit('fullscreen')">
-          <font-awesome-icon icon="expand" />
-        </div>
-        <div @pointerdown="$emit('close')">
-          <font-awesome-icon icon="x" />
+      <div class="top-row">
+        <font-awesome-icon
+          class="window-icon"
+          :icon="programIcon"
+        />
+        <span>{{ title }}</span>
+        <div class="buttons">
+          <div @pointerdown.stop="$emit('minimise')">
+            <font-awesome-icon icon="window-minimize" />
+          </div>
+          <div @pointerdown="$emit('fullscreen')">
+            <font-awesome-icon icon="expand" />
+          </div>
+          <div @pointerdown="$emit('close')">
+            <font-awesome-icon icon="x" />
+          </div>
         </div>
       </div>
+      <slot name="header" />
     </div>
     <slot />
   </div>
@@ -48,40 +51,43 @@ const title = props.program.name
   border-radius: 4px;
 
   .header {
-    height: 20px;
     width: 100%;
     background-color: #23262e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: white;
 
-    .window-icon {
-      position: absolute;
-      left: 5px;
-    }
-
-    span {
-      font-size: 14px;
-    }
-
-    .buttons {
-      position: absolute;
-      right: 1px;
+    .top-row {
       display: flex;
-      height: 20px;
+      justify-content: center;
       align-items: center;
+      height: 20px;
 
-      div {
-        cursor: pointer;
+      .window-icon {
+        position: absolute;
+        left: 5px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+
+      .buttons {
+        position: absolute;
+        right: 1px;
         display: flex;
+        height: 20px;
         align-items: center;
-        width: 20px;
-        height: 13px;
 
-        svg {
-          width: 100%;
-          height: 100%;
+        div {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          width: 20px;
+          height: 13px;
+
+          svg {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }

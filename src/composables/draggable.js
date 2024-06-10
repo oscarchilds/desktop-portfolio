@@ -6,7 +6,7 @@ export function useDraggable() {
 
   function createDraggable(target) {
     return Draggable.create(target, {
-      trigger: target.querySelector('.header'),
+      trigger: target.querySelector('.top-row'),
       bounds: '#desktop',
       zIndexBoost: false
     })

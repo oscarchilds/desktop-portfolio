@@ -15,8 +15,6 @@ import { notepad } from '@data/programs'
 </template>
 
 <style lang="scss" scoped>
-@import '../../assets/colours.scss';
-
 .window-content {
   flex-grow: 1;
   display: flex;
