@@ -1,5 +1,6 @@
 import { computed, ref } from "vue"
 import { useFileSystem } from "./fileSystem";
+import { programs } from "@data/programs"
 
 export function useFileBrowser() {
   const { doesFolderExist, readDir, getDirentStat } = useFileSystem()
@@ -78,15 +79,30 @@ export function useFileBrowser() {
     }
 
     return files.map(file => {
-      const stats = getDirentStat(`${fullTargetDir}/${file.name}`)
+      const fullPath = `${fullTargetDir}/${file.name}`
+      const stats = getDirentStat(fullPath)
       const mtime = stats.mtime
 
-      return {
+      var result = {
         name: file.name,
-        size: file.isDirectory() ? '' : stats.size,
         isDirectory: file.isDirectory(),
+        fullPath: fullPath,
+        selected: false,
+        renaming: false,
         lastModified: `${padToTwo(mtime.getDay())}/${padToTwo(mtime.getMonth())}/${mtime.getFullYear()} ${padToTwo(mtime.getHours())}:${padToTwo(mtime.getMinutes())}`
       }
+
+      if (result.isDirectory) {
+        result.icon = 'folder'
+      } else {
+        const extension = file.name.split('.').pop()
+
+        result.program = programs.find(x => x.fileTypes?.includes(extension))
+        result.icon = result.program.icon
+        result.size = stats.size
+      }
+
+      return result
     })
   }
 
@@ -97,6 +113,7 @@ export function useFileBrowser() {
     goToHomeDir,
     changeDirectory,
     searchForDirectory,
-    readDirForFileBrowser
+    readDirForFileBrowser,
+    goToDir
   }
 }

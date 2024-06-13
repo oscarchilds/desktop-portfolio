@@ -11,11 +11,11 @@ const dirContents = readDir(props.fileBrowser.currentDir.value)
 </script>
 
 <template>
-  <div>
-    <span
-      v-for="(value, key) in dirContents"
-      :key="key"
-    >
+  <div
+    v-for="(value, key) in dirContents"
+    :key="key"
+  >
+    <span>
       {{ value }}
     </span>
   </div>

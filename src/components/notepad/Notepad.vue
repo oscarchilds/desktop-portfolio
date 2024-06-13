@@ -1,6 +1,19 @@
 <script setup>
+import { ref, defineProps } from 'vue'
 import Window from '@components/ui/Window.vue'
 import { notepad } from '@data/programs'
+import { useFileSystem } from '@composables/fileSystem'
+
+const { openFile } = useFileSystem()
+
+const props = defineProps(['filePath'])
+
+const text = ref('')
+
+if (props.filePath) {
+  const file = openFile(props.filePath)
+  text.value = file
+}
 </script>
 
 <template>
@@ -9,7 +22,7 @@ import { notepad } from '@data/programs'
     :program="notepad"
   >
     <div class="window-content">
-      <textarea />
+      <textarea v-model="text" />
     </div>
   </window>
 </template>

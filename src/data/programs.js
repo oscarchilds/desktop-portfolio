@@ -12,7 +12,8 @@ export const consoleProgram = {
 export const notepad = {
   component: markRaw(Notepad),
   name: 'notepad',
-  icon: 'file-pen'
+  icon: 'file-pen',
+  fileTypes: ['txt']
 }
 
 export const fileBrowser = {

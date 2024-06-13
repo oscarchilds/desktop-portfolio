@@ -3,6 +3,9 @@ import HelpCommand from '@components/console/commands/HelpCommand.vue'
 import LinkComponent from '@components/console/commands/LinkComponent.vue'
 import ChangeDirectory from '@components/console/commands/ChangeDirectory.vue'
 import ReadDirectory from '@components/console/commands/ReadDirectory.vue'
+import MakeDirectory from '@components/console/commands/MakeDirectory.vue'
+import Remove from '@components/console/commands/Remove.vue'
+import Rename from '@components/console/commands/Rename.vue'
 
 export default [
   {
@@ -50,6 +53,27 @@ export default [
     description: 'read directory',
     lineData: {
       component: ReadDirectory,
+    }
+  },
+  {
+    name: 'mkdir',
+    description: 'create directory',
+    lineData: {
+      component: MakeDirectory
+    }
+  },
+  {
+    name: 'rm',
+    description: 'remove file or directory',
+    lineData: {
+      component: Remove
+    }
+  },
+  {
+    name: 'mv',
+    description: 'move/rename file or directory',
+    lineData: {
+      component: Rename
     }
   },
   {

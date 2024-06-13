@@ -32,7 +32,7 @@ export const useWindowManagementStore = defineStore('windowManagment', {
 
       this.windows = this.windows.filter(x => x.id != id)
     },
-    openProgram(program) {
+    openProgram(program, filePath) {
       this.windows.forEach(x => x.focused = false)
 
       this.windows.push({
@@ -41,7 +41,8 @@ export const useWindowManagementStore = defineStore('windowManagment', {
         open: true,
         minimised: false,
         focused: true,
-        focusOrder: this.windows.length
+        focusOrder: this.windows.length,
+        filePath: filePath
       })
     },
     setWindowDraggable(id, draggable) {

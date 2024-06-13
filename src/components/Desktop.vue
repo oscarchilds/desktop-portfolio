@@ -38,6 +38,7 @@ function assignDraggables() {
       :id="window.id"
       :class="{ focused: window.focused }"
       :style="{ 'z-index': window.focusOrder }"
+      :filePath="window.filePath"
       @focus="windowManagement.focusWindow(window.id)"
       @minimise="windowManagement.hideWindow(window.id)"
       @close="windowManagement.closeWindow(window.id)"
