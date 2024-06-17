@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import StartMenu from './StartMenu.vue'
 import Tray from './Tray.vue'
-import { useWindowManagementStore } from '@stores/windowManagement.js'
+import { useWindowManagementStore } from '@stores/windowManagement'
 
 const windowManagement = useWindowManagementStore()
 

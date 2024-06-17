@@ -1,17 +1,20 @@
-<script setup>
-import { programs } from '@data/programs.js'
-import { useWindowManagementStore } from '@stores/windowManagement.js'
+<script setup lang="ts">
+import Program from 'types/program'
+import { programs } from '@data/programs'
+import { useWindowManagementStore } from '@stores/windowManagement'
 
 const windowManagement = useWindowManagementStore()
 const emit = defineEmits(['close'])
 
-function clickProgram(program) {
+function clickProgram(program: Program) {
   windowManagement.openProgram(program)
   emit('close')
 }
 
-document.onclick = (e) => {
-  const clickedStart = ['start-button', 'start-menu'].includes(e.target.id)
+document.onclick = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  const clickedStart = ['start-button', 'start-menu'].includes(target.id)
+
   if (!clickedStart) emit('close')
 }
 </script>

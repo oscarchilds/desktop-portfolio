@@ -1,10 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue'
+import type { Ref } from 'vue'
 import Window from '@components/ui/Window.vue'
 import { fileBrowser as fileBrowserProgram } from '@data/programs'
 import { useFileBrowser } from '@composables/fileBrowser.js'
 import { useFileSystem } from '@composables/fileSystem.js'
-import { useWindowManagementStore } from '@stores/windowManagement.js'
+import { useWindowManagementStore } from '@stores/windowManagement'
+import FileBrowserItem from 'types/fileBrowserItem'
+import FileBrowserFile from 'types/fileBrowserFile'
 
 const {
   currentDir,
@@ -16,7 +19,7 @@ const {
 const { openProgram } = useWindowManagementStore()
 const { makeDir, remove, rename } = useFileSystem()
 
-const dirContent = ref([])
+const dirContent: Ref<FileBrowserItem[]> = ref([])
 const searchBar = ref('')
 const renameText = ref('')
 reload()
@@ -39,12 +42,13 @@ function goUpOneDir() {
   reload()
 }
 
-function open(item) {
+function open(item: FileBrowserItem) {
   if (item.isDirectory) {
     goToDir(item.name)
     reload()
   } else {
-    openProgram(item.program, item.fullPath)
+    var file = item as FileBrowserFile
+    openProgram(file.program, file.fullPath)
   }
 }
 
@@ -53,7 +57,7 @@ function createFolder() {
   reload()
 }
 
-function clickItem(item) {
+function clickItem(item: FileBrowserItem) {
   if (item.selected) return
 
   unselectAll()
@@ -68,16 +72,20 @@ function unselectAll() {
 }
 
 function deleteSelected() {
+  if (!selectedItem.value) throw 'Selected Item not found'
+
   remove(selectedItem.value.fullPath)
   reload()
 }
 
 function startRename() {
+  if (!selectedItem.value) throw 'Selected Item not found'
+
   renameText.value = selectedItem.value.name
   selectedItem.value.renaming = true
 }
 
-function endRename(item) {
+function endRename(item: FileBrowserItem) {
   if (!item.renaming) {
     reload()
     return
@@ -138,7 +146,7 @@ function reload() {
           <font-awesome-icon
             title="Rename Item"
             icon="pen"
-            :class="{ disabled: !anySelected || selectedItem.isDirectory }"
+            :class="{ disabled: !anySelected || selectedItem?.isDirectory }"
             @click="startRename"
           />
         </div>

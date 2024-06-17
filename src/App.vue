@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import Desktop from '@components/Desktop.vue'
-import { useFileSystem } from './composables/fileSystem'
+import { useFileSystem } from '@composables/fileSystem'
 
 const { initialiseFileSystem } = useFileSystem()
 initialiseFileSystem()

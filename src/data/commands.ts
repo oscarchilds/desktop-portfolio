@@ -1,3 +1,5 @@
+import type Command from 'types/command'
+
 import PlainText from '@components/console/commands/PlainText.vue'
 import HelpCommand from '@components/console/commands/HelpCommand.vue'
 import LinkComponent from '@components/console/commands/LinkComponent.vue'
@@ -81,4 +83,4 @@ export default [
     description: 'clear the console',
     clear: true
   }
-]
+] as Command[]

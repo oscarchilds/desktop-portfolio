@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 const time = ref('00:00')
 
-function padValue(value) {
+function padValue(value: number) {
   return String(value).padStart(2, '0')
 }
 

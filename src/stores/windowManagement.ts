@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
-import { fileBrowser } from "@data/programs"
+import { fileBrowser } from "../data/programs.js"
+import DesktopWindow from "types/desktopWindow"
+import Program from "types/program.ts"
 
 export const useWindowManagementStore = defineStore('windowManagment', {
   state: () => ({
@@ -8,20 +10,19 @@ export const useWindowManagementStore = defineStore('windowManagment', {
         id: `id-${self.crypto.randomUUID()}`,
         program: fileBrowser,
         minimised: false,
-        draggable: null,
         focused: true,
         focusOrder: 0
       }
-    ]
+    ] as DesktopWindow[]
   }),
   actions: {
-    closeWindow(id) {
-      const windowToClose = this.windows.find(x => x.id == id)
-      const otherWindows = this.windows.filter(x => x.id != id)
+    closeWindow(id: string) {
+      const windowToClose = this.windows.find(x => x.id == id) as DesktopWindow
+      const otherWindows = this.windows.filter(x => x.id != id) as DesktopWindow[]
 
       if (windowToClose.focused && this.windows.length > 1) {
         const focusOrderToFind = windowToClose.focusOrder - 1
-        const nextWindowToFocus = this.windows.find(x => x.focusOrder == focusOrderToFind)
+        const nextWindowToFocus = this.windows.find(x => x.focusOrder == focusOrderToFind) as DesktopWindow
 
         if (!nextWindowToFocus.minimised) nextWindowToFocus.focused = true
       }
@@ -32,29 +33,28 @@ export const useWindowManagementStore = defineStore('windowManagment', {
 
       this.windows = this.windows.filter(x => x.id != id)
     },
-    openProgram(program, filePath) {
+    openProgram(program: Program, filePath: string | null = null) {
       this.windows.forEach(x => x.focused = false)
 
       this.windows.push({
         id: `id-${self.crypto.randomUUID()}`,
         program: program,
-        open: true,
         minimised: false,
         focused: true,
         focusOrder: this.windows.length,
         filePath: filePath
-      })
+      } as DesktopWindow )
     },
-    setWindowDraggable(id, draggable) {
-      const window = this.windows.find(x => x.id === id)
+    setWindowDraggable(id: string, draggable: GSAPDraggableVars) {
+      var window = this.windows.find(x => x.id === id) as DesktopWindow
 
-      if (!window) console.error(`Error closing window with ID ${id}`)
+      if (!window) console.error(`Error setting window as draggable with ID ${id}`)
 
       window.draggable = draggable
     },
-    focusWindow(id) {
-      const windowToFocus = this.windows.find(x => x.id == id)
-      const otherWindows = this.windows.filter(x => x.id != id)
+    focusWindow(id: string) {
+      const windowToFocus = this.windows.find(x => x.id == id) as DesktopWindow
+      const otherWindows = this.windows.filter(x => x.id != id) as DesktopWindow[]
 
       otherWindows.forEach(x => {
         x.focused = false
@@ -68,16 +68,16 @@ export const useWindowManagementStore = defineStore('windowManagment', {
       windowToFocus.focusOrder = this.windows.length - 1
       windowToFocus.minimised = false
     },
-    hideWindow(id) {
-      const windowToHide = this.windows.find(x => x.id == id)
-      const otherWindows = this.windows.filter(x => x.id != id)
+    hideWindow(id: string) {
+      const windowToHide = this.windows.find(x => x.id == id) as DesktopWindow
+      const otherWindows = this.windows.filter(x => x.id != id) as DesktopWindow[]
 
       if (otherWindows.length) {
         otherWindows
           .filter(x => x.focusOrder < windowToHide.focusOrder)
           .forEach(x => x.focusOrder++)
 
-        const windowToFocus = otherWindows.find(x => x.focusOrder == this.windows.length - 1)
+        const windowToFocus = otherWindows.find(x => x.focusOrder == this.windows.length - 1) as DesktopWindow
 
         if (!windowToFocus.minimised) windowToFocus.focused = true
       }

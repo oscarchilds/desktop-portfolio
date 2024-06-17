@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useFileSystem } from '@composables/fileSystem'
 
 const props = defineProps({

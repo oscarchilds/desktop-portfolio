@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, watch, computed } from 'vue'
-import { useDraggable } from '@composables/draggable.js'
-import { useWindowManagementStore } from '@stores/windowManagement.js'
-import Taskbar from '@components/taskbar/Taskbar.vue'
 import { storeToRefs } from 'pinia'
+import { useDraggable } from '@composables/draggable'
+import { useWindowManagementStore } from '@stores/windowManagement'
+import Taskbar from '@components/taskbar/Taskbar.vue'
 
 const { createDraggable } = useDraggable()
 const windowManagement = useWindowManagementStore()
@@ -20,7 +20,7 @@ function assignDraggables() {
     .filter((x) => !x.draggable)
     .forEach((x) => {
       setTimeout(() => {
-        const el = document.getElementById(x.id)
+        const el = document.getElementById(x.id) as HTMLElement
 
         windowManagement.setWindowDraggable(x.id, createDraggable(el))
       }, 100)

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import commands from '@data/commands'
 </script>
 

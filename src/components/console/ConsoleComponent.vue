@@ -1,7 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import { useBuffer } from '@composables/buffer.js'
-import { useFileBrowser } from '@composables/fileBrowser.js'
+import { useBuffer } from '@composables/buffer'
+import { useFileBrowser } from '@composables/fileBrowser'
 import Window from '@components/ui/Window.vue'
 import { consoleProgram } from '@data/programs'
 

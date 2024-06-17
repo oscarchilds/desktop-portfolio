@@ -1,7 +1,8 @@
 import { ref, shallowRef } from "vue"
-import Commands from '@data/commands.js'
+import Commands from '@data/commands'
 import PlainText from '@components/console/commands/PlainText.vue'
 import UserInput from '@components/console/commands/UserInput.vue'
+import type BufferItem from "types/bufferItem"
 
 export function useBuffer() {
   const buffer = shallowRef([
@@ -13,11 +14,11 @@ export function useBuffer() {
       component: PlainText,
       text: 'Type help for a list of commands'
     }
-  ])
+  ] as BufferItem[])
 
   const userInput = ref("")
 
-  function submitInput(currentDir) {
+  function submitInput(currentDir: string) {
     const text = userInput.value
     userInput.value = ''
 
@@ -27,8 +28,8 @@ export function useBuffer() {
       dir: currentDir
     })
 
-    var commandText
-    var commandArguments = []
+    var commandText: string
+    var commandArguments: string[] = []
     const indexOfSpaceChar = text.indexOf(' ')
 
     if (indexOfSpaceChar > 0) {
@@ -55,8 +56,8 @@ export function useBuffer() {
     }
 
     buffer.value.push({
-      ...command.lineData,
-      commandArguments,
+      component: command.lineData?.component,
+      commandArguments: commandArguments,
       dir: currentDir
     })
   }

@@ -1,5 +1,5 @@
-<script setup>
-import { ref, defineProps } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import Window from '@components/ui/Window.vue'
 import { notepad } from '@data/programs'
 import { useFileSystem } from '@composables/fileSystem'
