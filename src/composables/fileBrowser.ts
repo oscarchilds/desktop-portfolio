@@ -1,12 +1,13 @@
 import { computed, ref } from "vue"
 import { useFileSystem } from "./fileSystem"
 import { programs } from "@data/programs"
-import FileBrowserItem from "types/fileBrowserItem"
-import FileBrowserFile from "types/fileBrowserFile"
 import prettyBytes from "pretty-bytes"
+import type FileBrowserItem from "types/fileBrowserItem"
+import type FileBrowserFile from "types/fileBrowserFile"
+import type Program from "types/program"
 
 export function useFileBrowser() {
-  const { doesFolderExist, readDirGetDirents, getDirentStat } = useFileSystem()
+  const { doesFolderExist, readDirGetDirents, getDirentStat, openFile } = useFileSystem()
 
   const homeDir = '/users/oscar'
   const currentDir = ref(homeDir)
@@ -89,11 +90,16 @@ export function useFileBrowser() {
         const mtime = stats.mtime
 
         const extension = file.name.split('.').pop() as string
+        var program: Program | undefined = undefined
+        var url: string | undefined = undefined
+        var icon: string
 
-        const program = programs.find(x => x.fileTypes?.includes(extension))
-
-        if (!program) {
-          throw (`No program found for filetype ${extension}`)
+        if (extension === 'url') {
+          url = openFile(fullPath)
+          icon = 'globe'
+        } else {
+          program = programs.find(x => x.fileTypes?.includes(extension)) as Program
+          icon = program.icon
         }
 
         var result: FileBrowserFile = {
@@ -102,8 +108,9 @@ export function useFileBrowser() {
           fullPath: fullPath,
           selected: false,
           renaming: false,
-          icon: program.icon,
+          icon: icon,
           program: program,
+          url: url,
           size: prettyBytes(stats.size),
           lastModified: getLastModified(mtime)
         }
@@ -133,7 +140,6 @@ export function useFileBrowser() {
 
     var result: FileBrowserItem[] = directories.concat(files)
 
-    console.log(result)
     return result
   }
 

@@ -54,7 +54,11 @@ function open(item: FileBrowserItem) {
     reload()
   } else {
     var file = item as FileBrowserFile
-    openProgram(file.program, file.fullPath)
+    if (file.program) {
+      openProgram(file.program, file.fullPath)
+    } else if (file.url) {
+      window.open(file.url, '_blank')
+    }
   }
 }
 
@@ -99,8 +103,6 @@ function endRename(item: FileBrowserItem) {
 
   const oldFile = `${currentDir.value}/${item.name}`
   const newFile = `${currentDir.value}/${renameText.value}`
-  console.log(oldFile)
-  console.log(newFile)
 
   rename(oldFile, newFile)
   reload()

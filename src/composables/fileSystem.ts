@@ -1,12 +1,17 @@
-import fs, { Dirent } from '@zenfs/core'
+import fs from '@zenfs/core'
 import aboutMe from '../data/files/txt/aboutMe.ts'
+import linkedIn from '../data/files/url/linkedIn.ts'
+import github from '../data/files/url/github.ts'
 
 export function useFileSystem() {
   function initialiseFileSystem() {
     fs.mkdirSync('/users')
     fs.mkdirSync('/users/oscar')
     fs.mkdirSync('/users/oscar/desktop')
+    fs.mkdirSync('/users/oscar/desktop/my-work')
     fs.writeFileSync('/users/oscar/about-me.txt', aboutMe)
+    fs.writeFileSync('/users/oscar/desktop/LinkedIn - Oscar Childs.url', linkedIn)
+    fs.writeFileSync('/users/oscar/desktop/Github - oscarchilds.url', github)
   }
 
   function doesFolderExist(dir: string) {

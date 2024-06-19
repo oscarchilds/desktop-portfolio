@@ -3,5 +3,6 @@ import Program from "./program"
 
 export default interface FileBrowserFile extends FileBrowserItem {
   size: string,
-  program: Program
+  program?: Program,
+  url?: string
 }
