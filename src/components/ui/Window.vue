@@ -44,6 +44,8 @@ const title = props.program.name
   position: absolute;
   min-width: 400px;
   min-height: 200px;
+  width: 500px;
+  height: 300px;
   border: 1px solid #999999;
   resize: both;
   overflow: auto;

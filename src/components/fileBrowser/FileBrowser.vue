@@ -270,7 +270,7 @@ function reload() {
     }
 
     > :nth-child(3) {
-      min-width: 50px;
+      min-width: 70px;
     }
 
     > :last-child {
