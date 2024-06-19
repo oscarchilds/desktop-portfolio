@@ -3,6 +3,7 @@ import { useFileSystem } from "./fileSystem"
 import { programs } from "@data/programs"
 import FileBrowserItem from "types/fileBrowserItem"
 import FileBrowserFile from "types/fileBrowserFile"
+import prettyBytes from "pretty-bytes"
 
 export function useFileBrowser() {
   const { doesFolderExist, readDirGetDirents, getDirentStat } = useFileSystem()
@@ -103,7 +104,7 @@ export function useFileBrowser() {
           renaming: false,
           icon: program.icon,
           program: program,
-          size: stats.size,
+          size: prettyBytes(stats.size),
           lastModified: getLastModified(mtime)
         }
 
