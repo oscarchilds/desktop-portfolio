@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const props = defineProps(['program'])
+import type Program from 'types/program'
+
+const props = defineProps<{
+  program: Program
+}>()
 
 const programIcon = props.program.icon
 const title = props.program.name
@@ -81,12 +85,17 @@ const title = props.program.name
           cursor: pointer;
           display: flex;
           align-items: center;
-          width: 20px;
-          height: 13px;
+          justify-content: center;
+          width: 22px;
+          padding: 0 1px;
+          height: 100%;
 
-          svg {
-            width: 100%;
-            height: 100%;
+          &:hover {
+            background: #65676c;
+          }
+
+          &:last-child:hover {
+            background: red;
           }
         }
       }
