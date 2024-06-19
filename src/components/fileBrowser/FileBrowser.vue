@@ -32,6 +32,12 @@ const anySelected = computed(() => {
   return !!selectedItem.value
 })
 
+const enableRename = computed(() => {
+  if (!selectedItem.value) return false
+
+  return !selectedItem.value.isDirectory
+})
+
 function doSearch() {
   searchForDirectory(searchBar.value)
   reload()
@@ -142,19 +148,23 @@ function reload() {
             @click="createFolder"
           />
         </div>
-        <div class="icon-button">
+        <div
+          class="icon-button"
+          :class="{ disabled: !enableRename }"
+        >
           <font-awesome-icon
             title="Rename Item"
             icon="pen"
-            :class="{ disabled: !anySelected || selectedItem?.isDirectory }"
             @click="startRename"
           />
         </div>
-        <div class="icon-button">
+        <div
+          class="icon-button"
+          :class="{ disabled: !anySelected }"
+        >
           <font-awesome-icon
             title="Delete Item"
             icon="trash"
-            :class="{ disabled: !anySelected }"
             @click="deleteSelected"
           />
         </div>

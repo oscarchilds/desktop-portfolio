@@ -76,6 +76,10 @@ export function useFileBrowser() {
       return value.toString().padStart(2, '0')
     }
 
+    function getLastModified(value: Date) {
+      return `${padToTwo(value.getDay())}/${padToTwo(value.getMonth())}/${value.getFullYear()} ${padToTwo(value.getHours())}:${padToTwo(value.getMinutes())}`
+    }
+
     const files = dirents
       .filter(x => !x.isDirectory())
       .map(file => {
@@ -100,7 +104,7 @@ export function useFileBrowser() {
           icon: program.icon,
           program: program,
           size: stats.size,
-          lastModified: `${padToTwo(mtime.getDay())}/${padToTwo(mtime.getMonth())}/${mtime.getFullYear()} ${padToTwo(mtime.getHours())}:${padToTwo(mtime.getMinutes())}`
+          lastModified: getLastModified(mtime)
         }
 
         return result
@@ -120,7 +124,7 @@ export function useFileBrowser() {
           selected: false,
           renaming: false,
           icon: 'folder',
-          lastModified: `${padToTwo(mtime.getDay())}/${padToTwo(mtime.getMonth())}/${mtime.getFullYear()} ${padToTwo(mtime.getHours())}:${padToTwo(mtime.getMinutes())}`
+          lastModified: getLastModified(mtime)
         }
 
         return result
