@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/desktop-site/',
+  base: '/desktop-portfolio/',
   plugins: [vue()],
   // plugins: [vue(), eslint()],
   resolve: {
